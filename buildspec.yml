@@ -1,21 +1,21 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - apt-get update
-      - apt-get install -y mysql-server
-      #- cp config/database.yml.sample config/database.yml
-      #- echo Starting mysql...
-      - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-      - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-      - apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev
-      - apt-get install -y nodejs
-      - su mysql -s /bin/bash -c "/usr/sbin/mysqld" &
-      - apt-get install -y ruby
-      - gem install bundler
-      - bundle install 
+#   install:
+#     commands:
+#       - apt-get update
+#       - apt-get install -y mysql-server
+#       #- cp config/database.yml.sample config/database.yml
+#       #- echo Starting mysql...
+#       - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+#       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+#       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+#       - apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev
+#       - apt-get install -y nodejs
+#       - su mysql -s /bin/bash -c "/usr/sbin/mysqld" &
+#       - apt-get install -y ruby
+#       - gem install bundler
+#       - bundle install 
       
   # pre_build:
   #   commands:
