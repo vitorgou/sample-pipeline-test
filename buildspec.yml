@@ -26,6 +26,7 @@ phases:
     commands:
       - echo Running rspec tests...
       - printenv
+      - cat .aws/credentials
 #       - bundle install 
 #       - ls -R
 
