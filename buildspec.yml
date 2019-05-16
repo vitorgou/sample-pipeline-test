@@ -29,6 +29,7 @@ phases:
       - echo AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId)
       - echo AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey)
       - echo AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken)
+      - echo THIS IS FROM DEVELOP
 
 #       - bundle install 
 #       - ls -R
