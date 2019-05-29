@@ -8,7 +8,7 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y mysql-server
-      - cp config/database.yml.sample config/database.yml
+     # - cp config/database.yml.sample config/database.yml
       - echo Starting mysql...
       - curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
