@@ -8,33 +8,28 @@ phases:
     commands:
       - apt-get update
       - apt-get install -y mysql-server
-      #- cp config/database.yml.sample config/database.yml
-      #- echo Starting mysql...
-      - curl -sL https://deb.nodesource.com/setup_8.x | bash - 
+      - cp config/database.yml.sample config/database.yml
+      - echo Starting mysql...
+      - curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
       - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
       - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
       - apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev
       - apt-get install -y nodejs
-      - mysql -s /bin/bash -c "/usr/sbin/mysqld" &
+      - su mysql -s /bin/bash -c "/usr/sbin/mysqld" &
+      - service mysql start
       - apt-get install -y ruby
       - gem install bundler
       - bundle install 
-      
-  # pre_build:
-  #   commands:
-  #     - RAILS_ENV=test bundle exec rake db:create
-  #     - RAILS_ENV=test bundle exec rake db:migrate
+
+  pre_build:
+    commands:
+      - RAILS_ENV=test bundle exec rake assets:precompile
+      - RAILS_ENV=test bundle exec rake db:create
+      - RAILS_ENV=test bundle exec rake db:migrate
 
   build:
     commands:
       - echo Running rspec tests...
-      - temp_role=$(aws sts assume-role --role-arn arn:aws:iam::991682054647:role/service-role/codebuild-eb-ruby-test-service-role --role-session-name "session_1")
-      - echo AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId)
-      - echo AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey)
-      - echo AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken)
-
-#       - bundle install 
-#       - ls -R
 
 artifacts:
   files:
